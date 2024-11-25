@@ -6,7 +6,7 @@ use App\Models\Contact;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
-
+use App\Http\Requests\Contact\StorageRequest;
 
 class ContactController extends Controller
 {
@@ -29,9 +29,15 @@ class ContactController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorageRequest $request)
     {
-        //
+        $data = $request->except('avatar');
+        if ($request->hasFile('avatar')) {
+            $file = $request->file('avatar');
+            $routeName = $file->store('avatars',['disk' => 'public']);
+            $data['avatar'] = $routeName;
+        }
+        dd($data);
     }
 
     /**
