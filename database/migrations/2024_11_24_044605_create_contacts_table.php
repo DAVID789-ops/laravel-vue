@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->string('email', 50);
+            $table->string('phone', 50);
             $table->string('avatar')->nullable();
             $table->enum('privacity', ['public', 'private'])->default('private');
             $table->foreignId('user_id')->constrained();

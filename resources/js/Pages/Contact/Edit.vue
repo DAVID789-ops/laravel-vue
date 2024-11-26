@@ -1,16 +1,21 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head, Link, useForm } from '@inertiajs/vue3';
+import { Head, Link, useForm, usePage } from '@inertiajs/vue3';
 import InputLabel from '@/Components/InputLabel.vue';
 import TextInput from '@/Components/TextInput.vue';
 import InputError from '@/Components/InputError.vue';
 import Fileinput from '@/Components/Fileinput.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
+
+const page = usePage()
+const contact = page.props.contact
+
+
 const initialValues = {
-    name: '',
-    phone: '',
+    name: contact.name,
+    phone: contact.phone,
     avatar: null,
-    privacity: "privado"
+    privacity: contact.privacity
 
 }
 
@@ -24,7 +29,7 @@ const onSelectAvatar = (e) => {
 
 }
 const submit = () => {
-    form.post(route('contact.store'))
+    form.post(route('contact.update', contact))
 
 
 }
@@ -38,10 +43,10 @@ const submit = () => {
         <template #header>
             <div class="flex items-center justify-between">
                 <h2 class="text-xl font-semibold leading-tight text-gray-800">
-                    Crear Contactos
+                    Actualiza contacto
                 </h2>
                 <Link :href="route('contact.index')">
-                Lista de Contactos
+                Regresar
                 </Link>
             </div>
         </template>
@@ -65,6 +70,9 @@ const submit = () => {
                                  placeholder="+57 123 456 789" />
 
                             <InputError class="mt-2" :message="form.errors.phone" />
+                        </div>
+                        <div>
+                            <img :src="'/storage/' + contact.avatar" alt="Avatar">
                         </div>
                         <div>
                             <InputLabel for="avatar" value="Avatar"/>

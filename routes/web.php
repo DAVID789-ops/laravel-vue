@@ -30,5 +30,7 @@ Route::prefix('dashboard')->group(function () {
     Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
     Route::get('/contact/create', [ContactController::class, 'create'])->name('contact.create');
     Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+    Route::get('/contact/{contact}/edit', [ContactController::class, 'edit'])->name('contact.edit');
+    Route::post('/contact/{contact}', [ContactController::class, 'update'])->name('contact.update');
 });
 require __DIR__.'/auth.php';
