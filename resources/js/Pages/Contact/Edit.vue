@@ -29,10 +29,16 @@ const onSelectAvatar = (e) => {
 
 }
 const submit = () => {
-    form.post(route('contact.update', contact))
+    form.post(route('contact.update', contact)),{
+        onSuccess: (e) => {
+            contact = e.props.contact;
+        }
+
+    }
 
 
 }
+
 </script>
 
 <template>

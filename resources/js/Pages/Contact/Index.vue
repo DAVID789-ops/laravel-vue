@@ -130,9 +130,12 @@ const contacts = page.props.contacts;
 
             <!-- Acciones -->
             <td class="border px-4 py-2">
-                <div>
+                <div class="space-x-4">
                     <Link :href="route( 'contact.edit', contact)">
                         Editar
+                    </Link>
+                    <Link :href="route( 'contact.destroy', contact)" method="delete" as="button">
+                        Eliminar
                     </Link>
 
                 </div>
